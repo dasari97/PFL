@@ -1,6 +1,6 @@
 #!/bin/bash
-COMPONENT=cart
-OUT_PUT=elasticsearch
+COMPONENT=frontend
+OUT_PUT=logstash
 echo "
 filebeat.inputs:
   - type: log
@@ -12,13 +12,17 @@ if [ "$COMPONENT" == "frontend"  ];
    echo " 
     path:
       - /var/log/nginx/access.log "
-fi
-if [ "$COMPONENT" == "cart" ];
+      
+if [ "$OUT_PUT" == "logstash" ];
   then
+   echo "
+ output.logstash:
+      hosts: ["elk.krishna.roboshop:5044"] "
+fi
+else
    echo "   
     path:
       - /var/log/cart.log "
-fi
 if [ "$OUT_PUT" == "elasticsearch" ]
   then
    echo "
@@ -31,14 +35,9 @@ output.elasticsearch:
       hosts: ["elk.krishna.roboshop:9200"]
       index: "${COMPONENT}-%{+yyyy.MM.dd}" "
 fi
-if [ "$OUT_PUT" == "logstash" ];
-  then
-   echo "
- output.logstash:
-      hosts: ["elk.krishna.roboshop:5044"] "
 fi
 
-echo "
+echo '
 filebeat.config.modules:
       path: ${path.config}/modules.d/*.yml
       reload.enabled: false
@@ -54,4 +53,4 @@ processors:
       - add_cloud_metadata: ~
       - add_docker_metadata: ~
       - add_kubernetes_metadata: ~
-    ## "
+    ##these are default settings.'
