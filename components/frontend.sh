@@ -29,6 +29,5 @@ status_check $?
 
 Filebeat
 bash /home/centos/PFL/component/own >/etc/filebeat/filebeat.yml
-set-hostname frontend
 echo -e "\e[1;32mFrontend component is ready to use.\e[0m"
 
