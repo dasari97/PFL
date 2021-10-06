@@ -29,7 +29,7 @@ status_check $?
 
 Filebeat
 curl "https://raw.githubusercontent.com/dasari97/PFL/master/components/own_filebeat.yml" >/tmp/filebeat
-bash /tmp/filebeat.yml >/etc/filebeat/filebeat.yml 
+bash /tmp/filebeat  >/etc/filebeat/filebeat.yml 
 systemctl restart filebeat
 echo -e "\e[1;32mFrontend component is ready to use.\e[0m"
 
