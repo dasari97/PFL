@@ -2,7 +2,6 @@
 
 source components/common.sh
 
-set-hostname frontend
 
 print "\e[1;33mInstall Nginx.\t\t\t\e[0m"
 yum install nginx -y &>>/tmp/log
@@ -29,6 +28,6 @@ systemctl start nginx &>>/tmp/log && systemctl enable nginx &>>/tmp/log && syste
 status_check $?
 
 Filebeat
-
+set-hostname frontend
 echo -e "\e[1;32mFrontend component is ready to use.\e[0m"
 
