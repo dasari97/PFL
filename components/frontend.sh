@@ -2,6 +2,8 @@
 
 source components/common.sh
 
+set-hostname $1
+
 print "\e[1;33mInstall Nginx.\t\t\t\e[0m"
 yum install nginx -y &>>/tmp/log
 status_check $?
