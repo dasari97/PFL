@@ -16,7 +16,7 @@ if [ "$COMPONENT" == "frontend"  ];
 if [ "$OUT_PUT" == "logstash" ];
   then
    echo "
- output.logstash:
+output.logstash:
       hosts: ["elk.krishna.roboshop:5044"] "
 fi
 else
