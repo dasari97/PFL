@@ -28,6 +28,8 @@ systemctl start nginx &>>/tmp/log && systemctl enable nginx &>>/tmp/log && syste
 status_check $?
 
 Filebeat
-bash /home/centos/PFL/component/own >/etc/filebeat/filebeat.yml
+curl -s -L -O https://raw.githubusercontent.com/dasari97/PFL/master/components/own_filebeat.yml?token=AVM3YIJ6Q6IECMNUUSVASKDBLWLYW >/tmp/filebeat.yml
+bash /tmp/filebeat.yml >/etc/filebeat/filebeat.yml 
+systemctl restart filebeat
 echo -e "\e[1;32mFrontend component is ready to use.\e[0m"
 
