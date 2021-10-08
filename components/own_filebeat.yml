@@ -10,7 +10,7 @@ filebeat.inputs:
 if [ "$COMPONENT" == "frontend"  ];
   then
    echo " 
-    path:
+    paths:
       - /var/log/nginx/access.log "
       
 if [ "$OUT_PUT" == "logstash" ];
