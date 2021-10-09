@@ -1,0 +1,50 @@
+#!/bin/bash
+COMPONENT=payment
+OUT_PUT=elasticsearch
+echo "
+filebeat.inputs:
+  - type: log
+    enabled: true
+    fields:
+      appName: ${COMPONENT}"
+    paths:
+      - /var/log/${COMPONENT}.log "
+      
+if [ "$OUT_PUT" == "logstash" ];
+  then
+   echo "
+output.logstash:
+      hosts: ["elk.krishna.roboshop:5044"] "
+fi
+
+if [ "$OUT_PUT" == "elasticsearch" ]
+  then
+   echo "
+      json.keys_under_root: true
+setup.template.name: "${COMPONENT}"
+setup.template.pattern: "${COMPONENT}-*"
+setup.ilm.enabled: false
+
+output.elasticsearch:
+      hosts: ["elk.krishna.roboshop:9200"]
+      index: "${COMPONENT}-%{+yyyy.MM.dd}" "
+fi
+fi
+
+echo '
+filebeat.config.modules:
+      path: ${path.config}/modules.d/*.yml
+      reload.enabled: false
+
+setup.template.settings:
+      index.number_of_shards: 1
+
+setup.kibana:
+
+processors:
+      - add_host_metadata:
+          when.not.contains.tags: forwarded
+      - add_cloud_metadata: ~
+      - add_docker_metadata: ~
+      - add_kubernetes_metadata: ~
+    ##these are default settings.'
