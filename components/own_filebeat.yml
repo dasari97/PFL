@@ -12,6 +12,7 @@ if [ "$COMPONENT" == "frontend"  ];
    echo " 
     paths:
       - /var/log/nginx/access.log "
+fi
       
 if [ "$OUT_PUT" == "logstash" ];
   then
@@ -19,10 +20,7 @@ if [ "$OUT_PUT" == "logstash" ];
 output.logstash:
       hosts: ["elk.krishna.roboshop:5044"] "
 fi
-else
-   echo "   
-    path:
-      - /var/log/cart.log "
+
 if [ "$OUT_PUT" == "elasticsearch" ]
   then
    echo "
@@ -35,7 +33,7 @@ output.elasticsearch:
       hosts: ["elk.krishna.roboshop:9200"]
       index: "${COMPONENT}-%{+yyyy.MM.dd}" "
 fi
-fi
+
 
 echo '
 filebeat.config.modules:

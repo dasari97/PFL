@@ -1,5 +1,5 @@
 #!/bin/bash
-COMPONENT=cart
+COMPONENT=user
 OUT_PUT=elasticsearch
 echo "
 filebeat.inputs:
@@ -11,31 +11,22 @@ if [ "$COMPONENT" == "user"  ];
   then
    echo " 
     paths:
-      - /var/log/cart.log "
-      
-if [ "$OUT_PUT" == "logstash" ];
-  then
-   echo "
-output.logstash:
-      hosts: ["elk.krishna.roboshop:5044"] "
+      - /var/log/user.log 
+    json.keys_under_root: true"
 fi
-else
-   echo "   
-    path:
-      - /var/log/cart.log "
-if [ "$OUT_PUT" == "elasticsearch" ]
+
+if [ "$OUT_PUT" == "elasticsearch" ];
   then
    echo "
-      json.keys_under_root: true
-setup.template.name: "${COMPONENT}"
-setup.template.pattern: "${COMPONENT}-*"
-setup.ilm.enabled: false
-
 output.elasticsearch:
       hosts: ["elk.krishna.roboshop:9200"]
-      index: "${COMPONENT}-%{+yyyy.MM.dd}" "
+      index: "${COMPONENT}-%{+yyyy.MM.dd}"
+      
+setup.template.name: "${COMPONENT}"
+setup.template.pattern: "${COMPONENT}-*"
+setup.ilm.enabled: false "
 fi
-fi
+
 
 echo '
 filebeat.config.modules:
