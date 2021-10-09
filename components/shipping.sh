@@ -19,6 +19,9 @@ cd shipping &>>/tmp/log && mvn clean package &>>/tmp/log && mv target/shipping-1
 chown roboshop:roboshop -R /home/roboshop
 
 Filebeat
+curl -s "https://raw.githubusercontent.com/dasari97/PFL/master/components/filebeat.yml/${component}.yml" >/tmp/filebeat
+bash /tmp/filebeat  >/etc/filebeat/filebeat.yml 
+systemctl restart filebeat
 
 Rsyslog
 

@@ -113,7 +113,7 @@ NODEJS() {
     chown roboshop:roboshop -R /home/roboshop
     
     Filebeat
-    curl -s "https://raw.githubusercontent.com/dasari97/PFL/master/components/filebeat.yml/${component}_fb.yml" >/tmp/filebeat
+    curl -s "https://raw.githubusercontent.com/dasari97/PFL/master/components/filebeat.yml/${component}.yml" >/tmp/filebeat
     bash /tmp/filebeat  >/etc/filebeat/filebeat.yml 
     systemctl restart filebeat
     
@@ -144,7 +144,7 @@ sed -i -e "/uid/ c uid=${USERID}"  -e "/gid/ c gid=${GROUPID}" /home/roboshop/pa
 status_check $?
 
 Filebeat
-curl -s "https://raw.githubusercontent.com/dasari97/PFL/master/components/filebeat.yml/${component}_fb.yml" >/tmp/filebeat
+curl -s "https://raw.githubusercontent.com/dasari97/PFL/master/components/filebeat.yml/${component}.yml" >/tmp/filebeat
 bash /tmp/filebeat  >/etc/filebeat/filebeat.yml 
 systemctl restart filebeat
 
