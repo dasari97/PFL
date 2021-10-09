@@ -12,7 +12,7 @@ if [ "$COMPONENT" == "frontend"  ];
    echo " 
     paths:
       - /var/log/nginx/access.log "
-
+      
 if [ "$OUT_PUT" == "logstash" ];
   then
    echo "
@@ -21,7 +21,7 @@ output.logstash:
 fi
 else
    echo "   
-    paths:
+    path:
       - /var/log/cart.log "
 if [ "$OUT_PUT" == "elasticsearch" ]
   then
@@ -30,6 +30,7 @@ if [ "$OUT_PUT" == "elasticsearch" ]
 setup.template.name: "${COMPONENT}"
 setup.template.pattern: "${COMPONENT}-*"
 setup.ilm.enabled: false
+
 output.elasticsearch:
       hosts: ["elk.krishna.roboshop:9200"]
       index: "${COMPONENT}-%{+yyyy.MM.dd}" "
@@ -40,9 +41,12 @@ echo '
 filebeat.config.modules:
       path: ${path.config}/modules.d/*.yml
       reload.enabled: false
+
 setup.template.settings:
       index.number_of_shards: 1
+
 setup.kibana:
+
 processors:
       - add_host_metadata:
           when.not.contains.tags: forwarded
