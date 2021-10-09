@@ -14,17 +14,17 @@ if [ "$COMPONENT" == "cart"  ];
       - /var/log/cart.log "
 fi
 
-if [ "$OUT_PUT" == "elasticsearch" ]
+if [ "$OUT_PUT" == "elasticsearch" ];
   then
    echo "
+output.elasticsearch:
+      hosts: ["elk.krishna.roboshop:9200"]
+      index: "${COMPONENT}-%{+yyyy.MM.dd}"
+      
       json.keys_under_root: true
 setup.template.name: "${COMPONENT}"
 setup.template.pattern: "${COMPONENT}-*"
-setup.ilm.enabled: false
-
-output.elasticsearch:
-      hosts: ["elk.krishna.roboshop:9200"]
-      index: "${COMPONENT}-%{+yyyy.MM.dd}" "
+setup.ilm.enabled: false "
 fi
 
 
