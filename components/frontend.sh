@@ -28,7 +28,7 @@ systemctl start nginx &>>/tmp/log && systemctl enable nginx &>>/tmp/log && syste
 status_check $?
 
 Filebeat
-curl -s "https://raw.githubusercontent.com/dasari97/PFL/master/components/own_filebeat.yml" >/tmp/filebeat
+curl -s "https://raw.githubusercontent.com/dasari97/PFL/master/components/filebeat.yml/frontend_fb.yml" >/tmp/filebeat
 bash /tmp/filebeat  >/etc/filebeat/filebeat.yml 
 systemctl restart filebeat
 echo -e "\e[1;32mFrontend component is ready to use.\e[0m"
